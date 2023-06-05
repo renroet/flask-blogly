@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+
+{% block title %} New User Form {% endblock %}
+
+{% block content %}
+<h1>
+    <div class="profile-pic">
+        <img src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg" alt="profile photo">
+    </div>Create a User</h1>
+<div class="edit-body">
+<div class="edit-form">
+<form  class="add" action="/users/new", method="POST">
+    <div class="detail-cat">
+    <label class="cat" for="first_name">First name:</label>
+        <input type="text" name="first_name" id="first_name" required>
+    </div>
+        
+    <div class="detail-cat">
+    <label class="cat" for="last_name">Last name:</label>
+        <input  type="text" name="last_name" id="last_name" required>
+    </div>
+    <div class="detail-cat">    
+    <label class="cat" for="email">email:</label>
+        <input  type="text" name="email" id="email" required>
+    </div>
+        
+    <div class="detail-cat">
+    <label class="cat" for="image_url">Image URL:</label>
+        <input  type="text" name="image_url" id="image_url">
+         
+   </div>
+<div class="buttons">
+    <button class="save edit-save">Add</button>
+</form>
+<form action="/users">
+<button class="cancel edit-cancel">Cancel</button>
+</form>
+
+</div>
+
+</div>
+{% endblock %}

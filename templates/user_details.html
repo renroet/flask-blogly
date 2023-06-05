@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block content %}
+<h1>
+<div class="profile-pic">
+    <img src="{{ user.image_url }}" alt="profile photo">
+</div>
+<div class="username">{{ user.first_name }} {{ user.last_name }}</div></h1>
+
+<div class="about">
+    <div class="detail-cat">
+        <p class="cat">email:</p> <p class="info"> {{ user.email }} </p>
+    </div>
+    <div class="detail-cat">
+        <p class="cat">Birthday:</p> <p class="info"> perhaps user birthday in here</p>
+    </div>
+    <div class="detail-cat">
+        <p class="cat">About me:</p> <p class="info">about the user perhappityhapps</p>
+    </div>
+   
+
+<!-- </div> -->
+
+
+<div class="buttons">
+    <form action="/users/{{ user.id }}/edit">
+        <button class="edit">Edit</button>
+    </form>
+    <form action="/users/{{ user.id }}/delete", method="POST">
+        <button class="delete">Delete</button>
+    </form>
+    <form action="/">
+        <button class="users">Users</button>
+    </form>
+</div>
+</div>
+
+
+{% endblock %}
