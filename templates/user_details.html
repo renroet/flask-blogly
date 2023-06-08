@@ -3,6 +3,13 @@
 {% block title %} Details {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <header class="{{ category }}"> {{ message }}</header>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <h1>
 <div class="profile-pic">
     <img src="{{ user.image_url }}" alt="profile photo">
@@ -10,18 +17,8 @@
 <div class="username">{{ user.first_name }} {{ user.last_name }}</div></h1>
 
 <div class="about">
-    <div class="detail-cat">
+<div class="prof">
         <p class="cat">email:</p> <p class="info"> {{ user.email }} </p>
-    </div>
-    <div class="detail-cat">
-        <p class="cat">Birthday:</p> <p class="info"> perhaps user birthday in here</p>
-    </div>
-    <div class="detail-cat">
-        <p class="cat">About me:</p> <p class="info">about the user perhappityhapps</p>
-    </div>
-   
-
-<!-- </div> -->
 
 
 <div class="buttons">
@@ -31,11 +28,30 @@
     <form action="/users/{{ user.id }}/delete", method="POST">
         <button class="delete">Delete</button>
     </form>
-    <form action="/">
+    <form action="/users">
         <button class="users">Users</button>
     </form>
 </div>
 </div>
 
+
+<div class="user-posts">
+    <!-- <blockquote></blockquote> -->
+    <p class="cat">
+        <h2>Posts</h2>
+    </p> <p class="info-posts"> 
+        <ul>
+            {% for post in posts %}
+                <li><a href="/posts/{{post.id}}">{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </p>
+    <section class="buttons-post">
+        <form action="/users/{{user.id}}/posts/new">
+        <button class="edit">Add</button>
+    </form>
+    </section>
+</div>
+</div>
 
 {% endblock %}

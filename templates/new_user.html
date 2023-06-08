@@ -4,6 +4,13 @@
 {% block title %} New User Form {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <header class="{{ category }}"> {{ message }}</header>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <h1>
     <div class="profile-pic">
         <img src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg" alt="profile photo">

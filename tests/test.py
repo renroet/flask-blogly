@@ -2,7 +2,7 @@ from unittest import TestCase
 from app import app
 from flask import session
 from sqlalchemy import delete
-from models import User, db
+from models import User, Post, db
 
 app.config['TESTING'] = True
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
@@ -17,14 +17,21 @@ class FlaskTests(TestCase):
 
     def setUp(self): 
         """Clears user table and then adds a sample user"""
+        Post.query.delete()
         User.query.delete()
 
         user = User(first_name="Kieren", last_name="Kooy", email="something.com")
+        post = Post(title='Hello', content="World")
 
         db.session.add(user)
         db.session.commit()
 
+        db.session.add(post)
+        db.session.commit()
+
         self.user_id = user.id 
+        self.post_id = post.id
+        print(self.post_id)
     
     def tearDown(self):
         """Cleans up after each function to the previous session status"""
@@ -65,3 +72,23 @@ class FlaskTests(TestCase):
 
             self.assertEqual(resp.status_code, 404)
             
+    def test_add_post(self):
+        with app.test_client() as client:
+            d = {"title": "A Good Day", "content": "To you all"}
+            resp = client.post(f'/users/{self.user_id}/posts/new', data = d, follow_redirects=True)
+            html = resp.get_data(as_text=True)
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("A Good Day", html)
+        
+    # def test_delete_post(self):
+    #     with app.test_client() as client:
+    #         post = Post.query.get(self.post_id)
+    #         d = {f"{k}":f"{v}" for (k,v) in post.items()}
+
+    #         resp = client.post(f'/posts/{self.post_id}/delete', data = d, follow_redirects=True)
+    #         html = resp.get_data(as_text=True)
+
+    #         self.assertEqual(resp.status_code, 200)
+    #         self.assertNotIn("Hello", html)
+    

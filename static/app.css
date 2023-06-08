@@ -22,18 +22,46 @@ img {
     display: flex;
     justify-content: space-between;
     width: 200px;
-    position: absolute;
-    bottom: 10px;
-    margin-bottom: 10px;
-
+    position: relative;
+    bottom: -10px;
+    left: -85px
 }
+
+.buttons-user{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px
+}
+
+.buttons-post {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    position: relative;
+    bottom: 0px;
+    margin-bottom: 10px;
+}
+
+.buttons-add {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    position: absolute;
+    bottom: 190px;
+    margin-bottom: 10px;
+}
+
+
 
 button  {
     flex: 1;
     padding: 8px 13px;
     font-size: large;
     margin-right: 20px;
-    
+    /* z-index: 100; */
 }
 
 .cancel {
@@ -72,24 +100,46 @@ button  {
     border-radius: 5px;
 }
 
+.prof {
+    width: 600px;
+    height: 100px;
+    margin-left: auto;
+    flex:1;
+    /* flex-direction: column; */
+    /* position: absolute; */
+    /* padding-bottom: 30px */
+}
+
+.user-posts {
+    flex:1;
+    width: 600px;
+    height: fit-content;
+    margin-left: auto;
+    /* display: flex;
+    flex-direction: column; */
+    /* position: absolute; */
+    /* padding-top: 120px */
+}
+
 .about {
     width: 600px;
-    height: 500px;
+    height: 400px;
     margin-left: 175px;
     display: flex;
     flex-direction: column;
     /* border: 1px solid black; */
-    position: absolute;
+    position: relative;
    
 }
 
 .edit-form {
     width: 600px;
-    height: 500px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     /* border: 1px solid black; */
     position: absolute;
+    
    
 }
 
@@ -97,15 +147,23 @@ button  {
     margin-left: 175px;
     width: 600px;
     height: 500px;
-    position: absolute;
-    
+    position: relative; 
 }
 
 .detail-cat {
-    position: relative;
+    width: 600px;
     /* check for ramifications */
-    flex: 1;
-    
+    flex: 1
+}
+
+.detail-title {
+    width: 600px;
+    height: 40px;
+}
+
+.detail-content {
+    width: 600px;
+    flex-grow: 1
 }
 
 .add {
@@ -140,25 +198,58 @@ button  {
     
 }
 
-label .cat {
+/* label .cat {
     display: inline;
-}
+} */
 
 input {
     position: absolute;
-    top: 0%;
     overflow: hidden;
-    /* z-index: -1; */
     font-size: large;
-    width: 70%;
+    width: 75%;
     margin-left: 5%;
-    float: right
+    float: right;
+}
+
+textarea {
+    position: absolute;
+    overflow: hidden;
+    font-size: large;
+    width: 75%;
+    margin-left: 5%;
+    float: right;
 }
 
 .info {
     font-size: large;
     width: 85%;
-    margin-left: 25%;
-    /* float: right; */
-    
+    margin-left: 15%;
+}
+
+.post-box {
+    width: 600px;
+    height: fit-content;
+    margin-left: 15px;
+}
+
+.post {
+    padding-bottom: 20px;
+}
+
+.success {
+    text-align: center;
+    justify-content: center;
+    color: rgb(48, 168, 48);
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(226, 224, 224);
+}
+
+.error {
+    text-align: center;
+    justify-content: center;
+    color: rgb(220, 57, 39);
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(226, 224, 224);
 }

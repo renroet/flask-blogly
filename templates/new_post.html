@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} New Post {% endblock %}
+
+{% block content %}
+
+<h1>
+    <div class="profile-pic">
+        <img src="{{ user.image_url }}" alt="profile photo">
+    </div>
+    Add Post for {{ user.first_name }} {{ user.last_name }}</h1>
+
+<div class="edit-body">
+<div class="edit-form">
+    <form class="add" action="/users/{{ user.id }}/posts/new" method="POST">
+        <div class="detail-title">
+            <label class="cat" for="title">Title</label>
+                <input type="text" name="title">
+    </div>
+        <div class="detail-content">
+            <label class="cat" for="content">Content</label>
+                <textarea name="content" id="" rows="10"></textarea>
+        </div>
+</div>
+
+<div class="buttons-add">
+    <button class="save">Save</button>
+</form>
+<form action="/users/{{ user.id }}">
+    <button class="cancel">Cancel</button>
+</form>
+</div>
+
+</div>
+
+
+{% endblock %}
