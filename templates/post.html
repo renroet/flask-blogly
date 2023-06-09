@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 <!-- <h1>{{ post.title }}</h1> -->
 
 <div class="post-box">
@@ -12,6 +13,17 @@
         {{ post.content }} 
         <br>
         <p><i>By {{ post.users_for_post.first_name }} {{ post.users_for_post.last_name }}</i></p>
+        <br>
+        <section class="p-t">
+            <b>Tags:</b>
+            <div class="p-t2">
+                {% for tag in post.tags %} 
+                    <form class="t-f" action="/tags/{{ tag.id }}">
+                        <button class="t-fb">{{ tag.name }}</button>
+                    </form>
+                {% endfor %}
+            </div>
+        </section>
     <section class="buttons-post">
         <form action="/users/{{ post.created_by }}">
             <button class="cancel">Cancel</button>

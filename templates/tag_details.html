@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ tag.name }} Details {% endblock %}
+
+{% block content %}
+
+<!-- {% with messages = get_flashed_messages(with_categories=true) %} -->
+    {% if messages %}
+        {% for category, message in messages %}
+        <header class="{{ category }}"> {{ message }}</header>
+        {% endfor %}
+    {% endif %}
+    <!-- {% endwith %} -->
+<h1 class="t-h">{{ tag.name }}</h1>
+    <div class="t-d">
+        <div class="t-d2">
+    {% for post in posts %}
+        <ul>
+            <li><a href="/posts/{{post.id}}">{{ post.title }}</a></li>
+        </ul>
+    {% endfor %}
+        </div>
+        <div class="t-b2">
+        <form class="t-b" action="/tags/new">
+            <button class="edit">Edit</button>
+        </form>
+        <form action="/tags">
+            <button class="cancel">Delete</button>
+        </form>
+        </div>
+    </div>
+
+    {% endblock %}

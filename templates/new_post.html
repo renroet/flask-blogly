@@ -15,15 +15,28 @@
     <form class="add" action="/users/{{ user.id }}/posts/new" method="POST">
         <div class="detail-title">
             <label class="cat" for="title">Title</label>
-                <input type="text" name="title">
+                <input class="i" type="text" name="title">
     </div>
         <div class="detail-content">
             <label class="cat" for="content">Content</label>
                 <textarea name="content" id="" rows="10"></textarea>
         </div>
+        <div class="detail-cat">
+            <label class="cat">Tags</label>
+            <div class="tag-input">
+            {% for tag in tags %}
+            <div class="t-i2">
+            <input class="t-i" type="checkbox" name="tags"  id="{{ tag.name }}"value="{{ tag.name }}"> 
+            <label class="t" for="{{ tag.name }}">
+                <!-- <input type="checkbox" name="tags"  id="{{ tag.name }}"value="{{ tag.name }}">  -->
+                {{ tag.name }}</label>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
 </div>
 
-<div class="buttons-add">
+<div class="buttons-user">
     <button class="save">Save</button>
 </form>
 <form action="/users/{{ user.id }}">

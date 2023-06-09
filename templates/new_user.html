@@ -10,7 +10,7 @@
         <header class="{{ category }}"> {{ message }}</header>
         {% endfor %}
     {% endif %}
-{% endwith %}
+    {% endwith %}
 <h1>
     <div class="profile-pic">
         <img src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg" alt="profile photo">
@@ -20,21 +20,21 @@
 <form  class="add" action="/users/new", method="POST">
     <div class="detail-cat">
     <label class="cat" for="first_name">First name:</label>
-        <input type="text" name="first_name" id="first_name" required>
+        <input class="i" type="text" name="first_name" id="first_name" required>
     </div>
         
     <div class="detail-cat">
     <label class="cat" for="last_name">Last name:</label>
-        <input  type="text" name="last_name" id="last_name" required>
+        <input class="i" type="text" name="last_name" id="last_name" required>
     </div>
     <div class="detail-cat">    
     <label class="cat" for="email">email:</label>
-        <input  type="text" name="email" id="email" required>
+        <input class="i" type="text" name="email" id="email" required>
     </div>
         
     <div class="detail-cat">
     <label class="cat" for="image_url">Image URL:</label>
-        <input  type="text" name="image_url" id="image_url">
+        <input class="i" type="text" name="image_url" id="image_url">
          
    </div>
 <div class="buttons">

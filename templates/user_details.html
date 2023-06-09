@@ -3,13 +3,13 @@
 {% block title %} Details {% endblock %}
 
 {% block content %}
-{% with messages = get_flashed_messages(with_categories=true) %}
+<!-- {% with messages = get_flashed_messages(with_categories=true) %} -->
     {% if messages %}
         {% for category, message in messages %}
         <header class="{{ category }}"> {{ message }}</header>
         {% endfor %}
     {% endif %}
-{% endwith %}
+    <!-- {% endwith %} -->
 <h1>
 <div class="profile-pic">
     <img src="{{ user.image_url }}" alt="profile photo">

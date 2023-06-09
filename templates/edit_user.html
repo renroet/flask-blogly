@@ -3,6 +3,7 @@
 {% block title %} Edit User {% endblock %}
 
 {% block content %}
+
 <h1>
     <div class="profile-pic">
         <img src="{{ user.image_url }}" alt="profile photo">
@@ -12,21 +13,21 @@
 <form  class="add" action="/users/{{ user.id }}/edit", method="POST">
     <div class="detail-cat">
     <label class="cat" for="first_name">First name:</label>
-        <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}">
+        <input class="i" type="text" name="first_name" id="first_name" value="{{ user.first_name }}">
     </div>
         <!-- </label> -->
     <div class="detail-cat">
     <label class="cat" for="last_name">Last name:</label>
-        <input  type="text" name="last_name" id="last_name" value="{{ user.last_name }}">
+        <input class="i" type="text" name="last_name" id="last_name" value="{{ user.last_name }}">
     </div>
     <div class="detail-cat">    <!-- </label> -->
     <label class="cat" for="email">email:</label>
-        <input  type="text" name="email" id="email" value="{{ user.email }}">
+        <input class="i" type="text" name="email" id="email" value="{{ user.email }}">
     </div>
         <!-- </label> -->
     <div class="detail-cat">
     <label class="cat" for="image_url">Image URL:</label>
-        <input  type="text" name="image_url" id="image_url" value="{{ user.image_url }}">
+        <input class="i" type="text" name="image_url" id="image_url" value="{{ user.image_url }}">
     </div>
         <!-- </label> -->
 </div>

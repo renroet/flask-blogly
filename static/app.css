@@ -43,6 +43,7 @@ img {
     position: relative;
     bottom: 0px;
     margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .buttons-add {
@@ -171,7 +172,7 @@ button  {
     flex-direction: column;
     position: absolute;
     width: 600px;
-    height: 500px;
+    min-height: 500px;
 }
 
 .add label {
@@ -198,11 +199,8 @@ button  {
     
 }
 
-/* label .cat {
-    display: inline;
-} */
 
-input {
+.i {
     position: absolute;
     overflow: hidden;
     font-size: large;
@@ -234,6 +232,8 @@ textarea {
 
 .post {
     padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .success {
@@ -253,3 +253,143 @@ textarea {
     border-radius: 8px;
     border: 1px solid rgb(226, 224, 224);
 }
+
+.t-h {
+    margin-left: 15px;
+}
+
+.t-d {
+    /* position: relative; */
+    min-height: 30px;
+    max-height: fit-content;
+    margin-left: 15px;
+    display: flex;
+    box-sizing:content-box;
+    flex-direction: column;
+}
+
+.t-add {
+    flex: 1;
+    flex-direction: column;
+    position: absolute;
+    height: 90px;
+}
+
+.t-d2 {
+    position: relative;
+    min-height: 5px;
+    max-height: fit-content;
+    margin-left: 15px;
+    /* display: flex; */
+}
+
+.t-b {
+    flex:1;
+    justify-content: space-between;
+    width: 200px;
+    /* position: relative;
+    bottom: 0%;
+    left: 0% */
+}
+
+.t-b2{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    position: relative;
+    bottom: 0px;
+    left: 0px
+}
+
+.p-t {
+    flex:1;
+    /* display: inline; */
+    padding-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    height: fit-content;
+    /* flex-wrap: row wrap; */
+}
+
+.p-t2 {
+    padding-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    flex-wrap: row wrap;
+}
+
+.t-f {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    /* flex-wrap: row wrap; */
+}
+
+.t-fb {
+    flex: auto;
+    min-width: 40px;
+    max-width: fit-content;
+    border-radius: 8px;
+    color: azure;
+    font-size: medium;
+    padding: 3px;
+    background-color: rgb(35, 197, 170);
+    border: 1px solid rgb(35,197, 170);
+}
+
+.p-t2 {
+    position: absolute;
+    /* overflow: hidden; */
+    font-size: large;
+    width: 75%;
+    margin-left: 5%;
+    float: right
+}
+
+
+
+.tag-input {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    margin-left: 0%;
+    margin-top: 30px;
+    
+    float: right;
+    display: flex;
+    
+    /* flex-direction: column; */
+    /* flex-wrap: wrap; */
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.t {
+    
+    /* flex-direction: row; */
+    text-align: left;
+    width: fit-content;
+    position: absolute;
+    top: 0%;
+    left: 25px
+}
+
+.t-i {
+    position: absolute;
+    top: 0%;
+    width: 20px
+    /* padding-right: 10px */
+}
+
+.t-i2 {
+    position: relative;
+    /* display: flex; */
+    flex:1; 
+    min-width: 20%;
+    justify-content: space-between;
+    
+
+}
+

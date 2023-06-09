@@ -2,7 +2,7 @@
 
 from flask import Flask, request, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag, PostTag
 from sqlalchemy.sql import text
 from sqlalchemy import exc
 
@@ -54,7 +54,7 @@ def add_user():
         flash(f'{new_user.first_name} {new_user.last_name} successfully added', 'success')
         return redirect(f'/users/{new_user.id}')
     except exc.IntegrityError:
-        
+
         flash('email address already in use', 'error')
         return redirect('/users/new')
 
@@ -108,7 +108,8 @@ def user_delete(user_id):
 def post_form(user_id):
     """Shows form to add a post for user with user_id"""
     user = User.query.get_or_404(user_id)
-    return render_template('new_post.html', user=user)
+    tags = Tag.query.all()
+    return render_template('new_post.html', user=user, tags=tags)
 
 
 @app.route('/users/<int:user_id>/posts/new', methods=['POST'])
@@ -117,10 +118,17 @@ def add_post(user_id):
     title = request.form["title"]
     content = request.form["content"]
     created_by = int(user_id)
+    tags = request.form.getlist('tags')
 
     new_post = Post(title=title, content=content, created_by=created_by)
 
     db.session.add(new_post)
+    db.session.commit()
+
+    for tag in tags:
+        t = Tag.query.filter(Tag.name == tag).all()
+        new_post.tags.append(t[0])
+
     db.session.commit()
 
     flash(f'{new_post.title} successfully added', 'success')
@@ -138,8 +146,9 @@ def show_post(post_id):
 def edit_post_form(post_id):
     """Shows form to edit post and to cancel edit (go back to user page)"""
     post = Post.query.get_or_404(post_id)
+    tags = Tag.query.all()
 
-    return render_template('edit_post.html', post=post)
+    return render_template('edit_post.html', post=post, tags=tags)
 
 @app.route('/posts/<int:post_id>/edit', methods=['POST'])
 def edit_post(post_id):
@@ -148,6 +157,10 @@ def edit_post(post_id):
 
     title = request.form["title"]
     content = request.form["content"]
+    tags = request.form.getlist("tags")
+    for tag in tags:
+        t = Tag.query.filter(Tag.name == tag).all()
+        post.tags.append(t[0])
 
     post.title = title
     post.content = content
@@ -174,4 +187,66 @@ def post_delete(post_id):
 @app.errorhandler(404)
 def page_not_found(e):
     render_template('404.html'), 404
+
+@app.route('/tags')
+def tags():
+    """Lists all tags with links to the tag detail page and associated posts.
+    Provides option to add a new tag"""
+    tags = Tag.query.all()
+    return render_template('tags.html', tags=tags)
+
+@app.route('/tags/<int:tag_id>')
+def tag_posts(tag_id):
+    """Gives any details about tag and lists all associated posts.
+    Provides option to edit or delete tag"""
+    tag = Tag.query.get(tag_id)
+    posts = tag.posts
+    return render_template('tag_details.html', tag=tag, posts=posts)
+
+@app.route('/tags/new')
+def new_tag_form():
+    """Shows form to add new tag"""
+    return render_template('add_tag.html')
+
+@app.route('/tags/new', methods=["POST"])
+def add_tag():
+    """Process new tag form data and add tag to db. Redirect to tag list page"""
     
+    name = request.form['name']
+    new_tag = Tag(name=name)
+    try:
+        db.session.add(new_tag)
+        db.session.commit()
+
+        flash(f'{name} tag successfully created', 'success')
+        return redirect('/tags')
+
+    except exc.IntegrityError:
+        flash(f'{name} already created', 'error')
+        return redirect('/tags/new')
+
+@app.route('/tags/<int:tag_id>/edit')
+def tag_edit_form(tag_id):
+    """Shows form to edit tag"""
+    tag = Tag.query.get(tag_id)
+
+    return render_template('edit_tag.html', tag=tag)
+
+@app.route('/tags/<int:tag_id>/edit', methods=["POST"])
+def tag_edit(tag_id):
+    """Process edit form data to update form in db. Redirect to tag list page"""
+    tag = Tag.query.get(tag_id)
+    name = request.form['name']
+    tag.name = name
+
+    db.session.commit()
+
+    flash(f'{tag.name} successfully updated', 'success')
+    return redirect('/tags')
+
+@app.route('/tags/<int:tag_id>/delete', methods=["POST"])
+def tag_delete(tag_id):
+    """Delete tag from db"""
+
+# make sure cannot delete tag if post still attached to it. tag must be removed from post first
+# make flash saying so
